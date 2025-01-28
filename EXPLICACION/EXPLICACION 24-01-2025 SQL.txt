@@ -1,0 +1,56 @@
+selecciono todos lo oficios de la tabla empleados
+SELECT OFICIO 
+FROM EMPLE;
+ 
+selecciono los oficios pero no todos solo los diferentes
+SELECT DISTINCT OFICIO
+FROM EMPLE;
+
+seleccionamos para que los ordene por oficio
+SELECT DISTINCT OFICIO
+FROM EMPLE
+ORDER BY OFICIO;
+
+vemos los oficios pero de forma descendente
+SELECT DISTINCT OFICIO
+FROM EMPLE
+ORDER BY OFICIO DESC;
+
+
+seleccionamos el apellido y oficio de los trabajadores que cobran mas de 1600
+SELECT APELLIDO, OFICIO
+FROM EMPLE
+WHERE SALARIO > 1600
+ORDER BY APELLIDO;
+
+
+seleccionamos los apellidos oficio y salario y oficio de la tabla empleados
+SELECT APELLIDO, OFICIO, SALARIO, COMISION
+FROM EMPLE;
+
+
+seleccionamos el salario de los directores
+SELECT  OFICIO, SALARIO
+FROM EMPLE
+WHERE OFICIO = 'DIRECTOR';
+
+
+
+seleccionamos el salario de los directores
+SELECT  OFICIO, SALARIO
+FROM EMPLE
+WHERE UPPER(OFICIO) = 'DIRECTOR';
+
+
+seleccionamos los num emple apellido oficio y dept num ordenado por apellido
+SELECT EMP_NO, APELLIDO, OFICIO, DEPT_NO
+FROM EMPLE
+WHERE DEPT_NO = 20
+ORDER BY APELLIDO;
+
+
+selecionamos los analistas
+SELECT EMP_NO, APELLIDO
+FROM EMPLE
+WHERE UPPER(OFICIO) = 'ANALISTA'
+ORDER BY EMP_NO;
