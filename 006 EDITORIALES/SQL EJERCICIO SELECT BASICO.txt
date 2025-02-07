@@ -1,13 +1,16 @@
+*************************************************************************************************************
 -  Nombre de todos los autores que tenemos
 
 SELECT NOMBRE_AUTOR
 FROM AUTOR;
 
+*************************************************************************************************************
 -  Nombre de los editores
 
 SELECT NOMBRE_EDITOR
 FROM EDITOR;
 
+*************************************************************************************************************
 -  Nombre de los editores que trabajan con el libro "Programación en Java"
 
 INSERT INTO LIBRO VALUES(21, 'Programación en Java', 'Disponible',4,4);
@@ -17,6 +20,13 @@ SELECT TITULO, ESTADO
 FROM LIBRO
 WHERE TITULO = 'Programación en Java';
 
+
+SELECT NOMBRE_EDITOR, TITULO
+FROM EDITOR, LIBRO
+WHERE EDITOR.ID_EDITOR = LIBRO.ID_EDITOR
+AND TITULO = 'Programación en Java';
+
+*************************************************************************************************************
 -  Nombre de los libros que ha editado "Lalo Lález"
 
 INSERT INTO EDITOR VALUES (7, 'info2@editorialnacional.com', 'Lalo Lález', 'Gran Via 190, Centro');
@@ -34,12 +44,14 @@ WHERE LIBRO.ID_EDITOR = EDITOR.ID_EDITOR
 AND NOMBRE_EDITOR = 'Lalo Lález';
 
 
+***************************************************************************************************************
 -  Los libros que aún están En Proceso
 
 SELECT TITULO, ESTADO
 FROM LIBRO
 WHERE ESTADO = 'En Proceso';
 
+***************************************************************************************************************
 -  Los nombres de imprenta que me han impreso algún libro
 
 SELECT NOMBRE, TITULO, ESTADO AS IMPRENTAS_QUE_HAN_IMPRESO
@@ -47,6 +59,8 @@ FROM IMPRENTA, LIBRO
 WHERE IMPRENTA.ID_IMPRENTA = LIBRO.ID_IMPRENTA
 ORDER BY NOMBRE;
 
+
+***************************************************************************************************************
 -  Los nombres de imprenta que me han impreso algún libro del autor "Lolo Lólez"
 
 INSERT INTO AUTOR VALUES (9, 'Lolo Lólez', 'LOL', 'Espanol');
@@ -65,4 +79,33 @@ AND LIBRO.ID_LIBRO = AUTOR_LIBRO.ID_LIBRO
 AND AUTOR_LIBRO.ID_AUTOR = AUTOR.ID_AUTOR
 AND NOMBRE_AUTOR = 'Lolo Lólez';
 
+
+
+
+ 
+***********************************************
+
+SELECT APELLIDO
+FROM EMPLE, DEPART
+WHERE EMPLE.DEPT_NO = DEPART.DEPT_NO
+AND UPPER(LOC) = 'BARCELONA';
+
+
+
+(ESTE NO POR QUE TARDA MUCHO MAS)
+SELECT APELLIDO
+FROM EMPLE 
+WHERE DEPT_NO IN (SELECT DEPT_ FROM DEPART WHERE UPPER(LOC) = 'BARCELONA');
+
+SELECT OFICIO
+FROM EMPLE
+WHERE UPPER(APELLIDO) = 'GIL';
+
+SELECT APELLIDO 
+FROM EMPLE
+WHERE UPPER(OFICIO) = 'ANALISTA';
+
+SELECT OFICIO
+FROM EMPLE
+WHERE UPPER(OFICIO) = (SELECT UPPER (OFICIO) FROM EMPLE WHERE UPPER (APELLIDO) = 'GIL');
 
