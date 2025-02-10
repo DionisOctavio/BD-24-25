@@ -1,0 +1,64 @@
+-  Nombre de todos los autores que tenemos
+
+SELECT NOMBRE_AUTOR
+FROM AUTOR;
+
+-  Nombre de los editores
+
+SELECT NOMBRE_EDITOR
+FROM EDITOR;
+
+-  Nombre de los editores que trabajan con el libro "Programación en Java"
+
+INSERT INTO LIBRO VALUES(21, 'Programación en Java', 'Disponible',4,4);
+INSERT INTO AUTOR_LIBRO (ID_AUTOR, ID_LIBRO) VALUES (7, 21);
+
+SELECT NOMBRE_EDITOR
+FROM EDITOR
+JOIN LIBRO ON EDITOR.ID_EDITOR = LIBRO.ID_EDITOR
+WHERE LIBRO.TITULO = 'Programación en Java';
+
+-  Nombre de los libros que ha editado "Lalo Lález"
+
+INSERT INTO EDITOR VALUES (7, 'info2@editorialnacional.com', 'Lalo Lález', 'Gran Via 190, Centro');
+INSERT INTO LIBRO VALUES(22, 'SQL Basico', 'Disponible',4,7);
+INSERT INTO LIBRO VALUES(23, 'El principito', 'Disponible',4,7);
+INSERT INTO LIBRO VALUES(24, 'Cenicienta', 'Disponible',4,7);
+INSERT INTO AUTOR_LIBRO VALUES (7, 22);
+INSERT INTO AUTOR_LIBRO VALUES (7, 23);
+INSERT INTO AUTOR_LIBRO VALUES (7, 24);
+
+SELECT TITULO, ESTADO, EDITOR.NOMBRE_EDITOR
+FROM LIBRO
+JOIN EDITOR ON LIBRO.ID_EDITOR = EDITOR.ID_EDITOR
+WHERE EDITOR.NOMBRE_EDITOR = 'Lalo Lález';
+
+-  Los libros que aún están En Proceso
+
+SELECT TITULO, ESTADO
+FROM LIBRO
+WHERE ESTADO = 'En Proceso';
+
+-  Los nombres de imprenta que me han impreso algún libro
+
+SELECT DISTINCT NOMBRE
+FROM IMPRENTA
+JOIN LIBRO ON LIBRO.ID_IMPRENTA = IMPRENTA.ID_IMPRENTA;
+
+-  Los nombres de imprenta que me han impreso algún libro del autor "Lolo Lólez"
+
+INSERT INTO AUTOR VALUES (9, 'Lolo Lólez', 'LOL', 'Espanol');
+INSERT INTO LIBRO VALUES(25, 'La estrategia del parasito', 'Disponible',4,7);
+INSERT INTO LIBRO VALUES(26, 'Manual de instrucciones para el fin del mundo', 'Disponible',4,7);
+INSERT INTO LIBRO VALUES(27, 'La Hora Zulu', 'Disponible',4,7);
+INSERT INTO AUTOR_LIBRO VALUES (9, 25);
+INSERT INTO AUTOR_LIBRO VALUES (9, 26);
+INSERT INTO AUTOR_LIBRO VALUES (9, 27);
+
+
+SELECT DISTINCT NOMBRE
+FROM IMPRENTA
+JOIN LIBRO ON IMPRENTA.ID_IMPRENTA = LIBRO.ID_IMPRENTA
+JOIN AUTOR_LIBRO ON LIBRO.ID_LIBRO = AUTOR_LIBRO.ID_LIBRO
+JOIN AUTOR ON AUTOR_LIBRO.ID_AUTOR = AUTOR.ID_AUTOR
+WHERE AUTOR.NOMBRE_AUTOR = 'Lolo Lólez';
